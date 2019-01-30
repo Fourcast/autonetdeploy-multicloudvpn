@@ -53,3 +53,8 @@ variable aws_vpc_igw {
   description = "Internet Gateway"
   default = "igw-f4584c96"
 }
+
+variable aws_default_route_table_id {
+    description = "Default Route Table Id"
+    default = "rtb-ce3424ac"
+}
