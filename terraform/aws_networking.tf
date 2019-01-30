@@ -20,6 +20,7 @@
  */
 
 resource "aws_vpc" "aws-vpc" {
+  id = "${var.aws_vpc_id}"
   cidr_block = "${var.aws_network_cidr}"
   enable_dns_support = true
   enable_dns_hostnames = true
@@ -29,6 +30,7 @@ resource "aws_vpc" "aws-vpc" {
 }
 
 resource "aws_subnet" "aws-subnet1" {
+  id                = "${var.aws_subnet1_id}"
   vpc_id            = "${aws_vpc.aws-vpc.id}"
   cidr_block        = "${var.aws_subnet1_cidr}"
 
@@ -38,6 +40,7 @@ resource "aws_subnet" "aws-subnet1" {
 }
 
 resource "aws_internet_gateway" "aws-vpc-igw" {
+  id = "${var.aws_vpc_igw}"
   vpc_id = "${aws_vpc.aws-vpc.id}"
 
   tags {
