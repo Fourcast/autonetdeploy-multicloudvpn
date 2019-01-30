@@ -31,11 +31,11 @@ variable "gcp_project_id" {
 
 variable gcp_region {
   description = "Default to Oregon region."
-  default = "europe-west1"
+  default = "europe-west2"
 }
 
 variable gcp_subnet1_cidr {
-  default = "10.132.0.0/20"
+  default = "10.154.0.0/20"
 }
 
 variable gcp_network_name {

@@ -36,13 +36,10 @@ variable aws_network_cidr {
 
 variable aws_subnet1_cidr {
   description = "Subset block from VPC network ip block."
-  default = "172.31.0.0/16"
+  default = "172.31.32.0/20"
 }
 
-variable aws_vm_address {
-  description = "Private IP address for AWS VM instance."
-  default = "172.31.42.92"
-}
+
 
 variable aws_internet_gateway_id {
   description = "Internet Gateway id"
