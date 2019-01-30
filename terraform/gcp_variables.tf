@@ -31,30 +31,15 @@ variable "gcp_project_id" {
 
 variable gcp_region {
   description = "Default to Oregon region."
-  default = "us-west1"
-}
-
-variable gcp_instance_type {
-  description = "Machine Type. Correlates to an network egress cap."
-  default = "n1-highmem-8"
-}
-
-variable gcp_disk_image {
-  description = "Boot disk for gcp_instance_type."
-  default = "projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts"
-}
-
-variable gcp_network_cidr {
-  default = "10.240.0.0/16"
+  default = "europe-west1"
 }
 
 variable gcp_subnet1_cidr {
-  default = "10.240.0.0/24"
+  default = "10.132.0.0/20"
 }
 
-variable gcp_vm_address {
-  description = "Private IP address for GCP VM instance."
-  default = "10.240.0.100"
+variable gcp_network_name {
+  default = "default"
 }
 
 variable GCP_TUN1_VPN_GW_ASN {

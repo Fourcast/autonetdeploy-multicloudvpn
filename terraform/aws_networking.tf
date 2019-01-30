@@ -14,43 +14,12 @@
  * limitations under the License.
  */
 
-
-/*
- * Terraform networking resources for AWS.
- */
-
-resource "aws_vpc" "aws-vpc" {
-  cidr_block = "${var.aws_network_cidr}"
-  enable_dns_support = true
-  enable_dns_hostnames = true
-  tags {
-    "Name" = "aws-vpc"
-  }
-}
-
-resource "aws_subnet" "aws-subnet1" {
-  vpc_id            = "${aws_vpc.aws-vpc.id}"
-  cidr_block        = "${var.aws_subnet1_cidr}"
-
-  tags {
-    Name = "aws-vpn-subnet"
-  }
-}
-
-resource "aws_internet_gateway" "aws-vpc-igw" {
-  vpc_id = "${aws_vpc.aws-vpc.id}"
-
-  tags {
-    Name = "aws-vpc-igw"
-  }
-}
-
 /*
  * ----------VPN Connection----------
  */
 
 resource "aws_vpn_gateway" "aws-vpn-gw" {
-  vpc_id = "${aws_vpc.aws-vpc.id}"
+  vpc_id = "${var.aws_vpc_id}"
 }
 
 resource "aws_customer_gateway" "aws-cgw" {
@@ -63,10 +32,10 @@ resource "aws_customer_gateway" "aws-cgw" {
 }
 
 resource "aws_default_route_table" "aws-vpc" {
-  default_route_table_id = "${aws_vpc.aws-vpc.default_route_table_id}"
+  default_route_table_id = "${var.aws_vpc_default_route_table_id}"
   route {
     cidr_block  = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.aws-vpc-igw.id}"
+    gateway_id = "${var.aws_internet_gateway_id}"
   }
   propagating_vgws = [
     "${aws_vpn_gateway.aws-vpn-gw.id}"

@@ -26,30 +26,36 @@ variable aws_credentials_file_path {
 
 variable aws_region {
   description = "Default to Oregon region."
-  default = "us-west-2"
-}
-
-variable aws_instance_type {
-  description = "Machine Type. Includes 'Enhanced Networking' via ENA."
-  default = "r4.2xlarge"
-}
-
-variable aws_disk_image {
-  description = "Boot disk for gcp_instance_type."
-  default = "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"
+  default = "eu-west-1"
 }
 
 variable aws_network_cidr {
   description = "VPC network ip block."
-  default = "172.16.0.0/16"
+  default = "172.31.0.0/16"
 }
 
 variable aws_subnet1_cidr {
   description = "Subset block from VPC network ip block."
-  default = "172.16.0.0/24"
+  default = "172.31.0.0/16"
 }
 
 variable aws_vm_address {
   description = "Private IP address for AWS VM instance."
-  default = "172.16.0.100"
+  default = "172.31.42.92"
 }
+
+variable aws_internet_gateway_id {
+  description = "Internet Gateway id"
+  default = "igw-f4584c96"
+}
+
+variable aws_vpc_id {
+  description = "VPC id"
+  default = "vpc-1a051478"
+}
+
+variable aws_vpc_default_route_table_id {
+  description = "Main Route table id"
+  default = "rtb-ce3424ac"
+}
+
