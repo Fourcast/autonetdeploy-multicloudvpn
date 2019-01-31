@@ -16,6 +16,19 @@
 
 
 /*
+ * Terraform networking resources for GCP.
+ */
+
+data "google_compute_network" "gcp-network" {
+  name = "default"
+}
+
+data "google_compute_subnetwork" "gcp-subnet1" {
+  name          = "default"
+  region        = "${var.gcp_region}"
+}
+
+/*
  * ----------VPN Connection----------
  */
 
@@ -26,7 +39,7 @@ resource "google_compute_address" "gcp-vpn-ip" {
 
 resource "google_compute_vpn_gateway" "gcp-vpn-gw" {
   name    = "gcp-vpn-gw-${var.gcp_region}"
-  network = "${var.gcp_network_name}"
+  network = "${data.google_compute_network.gcp-network.name}"
   region  = "${var.gcp_region}"
 }
 
@@ -77,7 +90,7 @@ resource "google_compute_vpn_tunnel" "gcp-tunnel1" {
 resource "google_compute_router" "gcp-router1" {
   name = "gcp-router1"
   region = "${var.gcp_region}"
-  network = "${var.gcp_network_name}"
+  network = "${data.google_compute_network.gcp-network.name}"
   bgp {
     asn = "${aws_customer_gateway.aws-cgw.bgp_asn}"
   }
@@ -124,7 +137,7 @@ resource "google_compute_vpn_tunnel" "gcp-tunnel2" {
 resource "google_compute_router" "gcp-router2" {
   name = "gcp-router2"
   region = "${var.gcp_region}"
-  network = "${var.gcp_network_name}"
+  network = "${data.google_compute_network.gcp-network.name}"
   bgp {
     asn = "${aws_customer_gateway.aws-cgw.bgp_asn}"
   }

@@ -36,26 +36,25 @@ variable aws_network_cidr {
 
 variable aws_subnet1_cidr {
   description = "Subset block from VPC network ip block."
-  default = "172.31.0.0/16"
-}
-
-variable aws_vm_address {
-  description = "Private IP address for AWS VM instance."
-  default = "172.31.42.92"
-}
-
-variable aws_internet_gateway_id {
-  description = "Internet Gateway id"
-  default = "igw-f4584c96"
+  default = "172.31.32.0/20"
 }
 
 variable aws_vpc_id {
-  description = "VPC id"
+  description = "VPC ID"
   default = "vpc-1a051478"
 }
 
-variable aws_vpc_default_route_table_id {
-  description = "Main Route table id"
-  default = "rtb-ce3424ac"
+variable aws_subnet1_id {
+  description = "Subnet1 ID"
+  default = "subnet-60003f14"
 }
 
+variable aws_vpc_igw {
+  description = "Internet Gateway"
+  default = "igw-f4584c96"
+}
+
+variable aws_default_route_table_id {
+    description = "Default Route Table Id"
+    default = "rtb-ce3424ac"
+}

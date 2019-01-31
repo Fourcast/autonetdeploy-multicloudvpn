@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
+
+/*
+ * Terraform networking resources for AWS.
+ */
+
+data "aws_vpc" "aws-vpc" {
+  id = "${var.aws_vpc_id}"
+}
+
+data "aws_subnet" "aws-subnet1" {
+  id                = "${var.aws_subnet1_id}"
+}
+
+data "aws_internet_gateway" "aws-vpc-igw" {
+  internet_gateway_id = "${var.aws_vpc_igw}"
+}
+
 /*
  * ----------VPN Connection----------
  */
 
 resource "aws_vpn_gateway" "aws-vpn-gw" {
-  vpc_id = "${var.aws_vpc_id}"
+  vpc_id = "${data.aws_vpc.aws-vpc.id}"
 }
 
 resource "aws_customer_gateway" "aws-cgw" {
@@ -32,10 +49,10 @@ resource "aws_customer_gateway" "aws-cgw" {
 }
 
 resource "aws_default_route_table" "aws-vpc" {
-  default_route_table_id = "${var.aws_vpc_default_route_table_id}"
+  default_route_table_id = "${var.aws_default_route_table_id}"
   route {
     cidr_block  = "0.0.0.0/0"
-    gateway_id = "${var.aws_internet_gateway_id}"
+    gateway_id = "${data.aws_internet_gateway.aws-vpc-igw.internet_gateway_id}"
   }
   propagating_vgws = [
     "${aws_vpn_gateway.aws-vpn-gw.id}"

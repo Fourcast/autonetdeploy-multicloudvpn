@@ -21,8 +21,8 @@
 
 # Allow PING testing.
 resource "google_compute_firewall" "gcp-allow-icmp" {
-  name    = "${var.gcp_network_name}-gcp-allow-icmp"
-  network = "${var.gcp_network_name}"
+  name    = "${data.google_compute_network.gcp-network.name}-gcp-allow-icmp"
+  network = "${data.google_compute_network.gcp-network.name}"
 
   allow {
     protocol = "icmp"
@@ -35,8 +35,8 @@ resource "google_compute_firewall" "gcp-allow-icmp" {
 
 # Allow SSH for iperf testing.
 resource "google_compute_firewall" "gcp-allow-ssh" {
-  name    = "${var.gcp_network_name}-gcp-allow-ssh"
-  network = "${var.gcp_network_name}"
+  name    = "${data.google_compute_network.gcp-network.name}-gcp-allow-ssh"
+  network = "${data.google_compute_network.gcp-network.name}"
 
   allow {
     protocol = "tcp"
@@ -50,8 +50,8 @@ resource "google_compute_firewall" "gcp-allow-ssh" {
 
 # Allow traffic from the VPN subnets.
 resource "google_compute_firewall" "gcp-allow-vpn" {
-  name    = "${var.gcp_network_name}-gcp-allow-vpn"
-  network = "${var.gcp_network_name}"
+  name    = "${data.google_compute_network.gcp-network.name}-gcp-allow-vpn"
+  network = "${data.google_compute_network.gcp-network.name}"
 
   allow {
     protocol = "tcp"
@@ -70,8 +70,8 @@ resource "google_compute_firewall" "gcp-allow-vpn" {
 
 # Allow TCP traffic from the Internet.
 resource "google_compute_firewall" "gcp-allow-internet" {
-  name    = "${var.gcp_network_name}-gcp-allow-internet"
-  network = "${var.gcp_network_name}"
+  name    = "${data.google_compute_network.gcp-network.name}-gcp-allow-internet"
+  network = "${data.google_compute_network.gcp-network.name}"
 
   allow {
     protocol = "tcp"
